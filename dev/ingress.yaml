@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hrbuddy
+  namespace: hrbuddy
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "181"
+spec:
+  tls:
+    - hosts:
+      - server.hrbuddy.xyz
+      secretName: tls-secret
+  ingressClassName: nginx
+  rules:
+    - host: server.hrbuddy.xyz
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 80
+            path: /

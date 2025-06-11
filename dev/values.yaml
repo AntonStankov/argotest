@@ -1,0 +1,10 @@
+auth:
+  rootPassword: secret
+  username: quarkus
+  password: secret
+  database: quarkus_db
+
+primary:
+  persistence:
+    enabled: true
+    size: 8Gi
